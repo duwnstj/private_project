@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<list key="installedFeatures">
-		<item value="org.eclipse.buildship:3.1.9.v20240115-1636"/>
+		<item value="org.eclipse.buildship:3.1.9.v20240116-1515"/>
 		<item value="org.eclipse.datatools.common.doc.user:1.15.0.202311071249"/>
 		<item value="org.eclipse.datatools.connectivity.doc.user:1.15.0.202311071249"/>
 		<item value="org.eclipse.datatools.connectivity.feature:1.16.0.202311071345"/>

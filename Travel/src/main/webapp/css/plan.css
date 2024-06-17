@@ -113,8 +113,8 @@ body {
 	margin-right: auto;
 }
 
-.tb_country{
-	display: flex;
+.countryMain{
+	display: none;
     width: 340px;
     position: fixed;
     border-collapse: separate;
@@ -140,7 +140,7 @@ body {
 	font-weight: bold;
 }
 
-.tb_city{
+.city_main{
 	display: none;
     width: 340px;
     position: fixed;
@@ -148,18 +148,18 @@ body {
     border-spacing: 13px;
 }
 
-.tb_city>th {
+.city_main>th {
   display: flex;
   flex-direction: column;
 }
 
-.c_name,
+.national_name,
 .plan_info {
 	color: black;
   text-align: left;
 }
 
-.c_name{
+.national_name{
 	font-size: 30px;
 }
 

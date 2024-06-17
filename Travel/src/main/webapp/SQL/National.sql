@@ -3,7 +3,6 @@ select * from city;
 select * from plan;
 select * from destination;
 
-
 drop table plan;
 drop table city;
 drop table destination;

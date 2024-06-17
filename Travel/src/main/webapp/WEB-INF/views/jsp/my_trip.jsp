@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My Trip</title>
 <link rel="stylesheet" type="text/css" href="../css/my_trip.css">
-<link rel="stylesheet" type="text/css" href="../css/posts.css">
+<link rel="stylesheet" type="text/css" href="../css/planPost.css">
 <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
     integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="

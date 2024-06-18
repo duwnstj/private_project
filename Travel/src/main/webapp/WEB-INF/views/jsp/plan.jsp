@@ -113,7 +113,7 @@ var nationalCode = "${nationalCode}";
                             <div class="day2">토</div>
                         </div>
                     
-                        <div class="calendar-dates" id="calendarDates"></div>
+                        <div class="calendar_dates" id="calendarDates"></div>
                         <div id="selectedDates" >
                         </div>
                     </div>

@@ -146,7 +146,7 @@ var openModalBtn= document.getElementById('createPlan');
  const initAutocomplete = () => {
             const input = document.getElementById("placeSearch");
             const options = {
-                componentRestrictions: { country: "nationalCode" }, // Example: Restrict to United States
+                componentRestrictions: { country: nationalCode },
                 fields: ["address_components", "geometry"],
             };
 

@@ -4,9 +4,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const secondBtn = document.querySelector('.second_btn');
     const thirdBtn = document.querySelector('.third_btn');
     
-    const countryMain= document.querySelector('.country_main');
+    const tbCountry= document.querySelector('.tb_country');
     const tbDate= document.querySelector('.C_container');
-    const cityMain= document.querySelector('.city_main');
+    const tbCity= document.querySelector('.tb_city');
 		
 // 현재 URL 가져오기
     var currentUrl = window.location.href;
@@ -26,16 +26,16 @@ function initdefaultMap() {
 initdefaultMap();
 
     // main과 관련된 테이블 내용 수정
-   countryMain.innerHTML= "<tr><th>선택된 국가가 없습니다.</th></tr>"
+   tbCountry.innerHTML= "<tr><th>선택된 국가가 없습니다.</th></tr>"
    tbDate.innerHTML="<div>날짜를 선택할 수 없습니다.</div>"
-   cityMain.innerHTML= "<tr><th>도시를 선택할 수 없습니다.</th></tr>"
+   tbCity.innerHTML= "<tr><th>도시를 선택할 수 없습니다.</th></tr>"
    
 // 각 버튼에 클릭 이벤트 리스너를 추가
     firstBtn.addEventListener('click', () => {// 선택된 버튼에만 .selected 클래스를 추가하고 선택된 버튼에 해당하는 테이블 표시
         firstBtn.classList.add('selected');
         secondBtn.classList.remove('selected');
         thirdBtn.classList.remove('selected');
-        countryMain.style.display= 'flex';
+        tbCountry.style.display= 'table';
 
     });
 
@@ -53,7 +53,7 @@ initdefaultMap();
         firstBtn.classList.remove('selected');
         secondBtn.classList.remove('selected');
         thirdBtn.classList.add('selected');
-        cityMain.style.display= 'flex';
+        tbCity.style.display= 'table';
     });
     
 }else {// url에 main이 포함되어있는지 확인하는 if()
@@ -117,10 +117,10 @@ var openModalBtn= document.getElementById('createPlan');
     selectCityButtons.forEach(function(button) {
 		button.addEventListener('click', function(){
 			this.classList.toggle('selected');
-
+			const cityName= this.getAttribute('data-cityName');
 			const latitude = parseFloat(this.dataset.latitude);
             const longitude = parseFloat(this.dataset.longitude);
-
+            const cityCode= this.getAttribute('data-cityCode');
             // 현재 클릭한 버튼과 연결된 마커를 추적하기 위한 변수
             
 			// 마커를 표시할 위치 생성
@@ -151,9 +151,9 @@ initMap();
             firstBtn.classList.add('selected');
             secondBtn.classList.remove('selected');
             thirdBtn.classList.remove('selected');
-            countryMain.style.display = 'flex';
+            tbCountry.style.display = 'table';
             tbDate.style.display = 'none';
-            cityMain.style.display = 'none';
+            tbCity.style.display = 'none';
 
         });
 
@@ -163,9 +163,9 @@ initMap();
             firstBtn.classList.remove('selected');
             secondBtn.classList.add('selected');
             thirdBtn.classList.remove('selected');
-            countryMain.style.display = 'none';
+            tbCountry.style.display = 'none';
             tbDate.style.display = 'flex';
-            cityMain.style.display = 'none';
+            tbCity.style.display = 'none';
 
         });
 
@@ -173,12 +173,12 @@ initMap();
             firstBtn.classList.remove('selected');
             secondBtn.classList.remove('selected');
             thirdBtn.classList.add('selected');
-            countryMain.style.display = 'none';
+            tbCountry.style.display = 'none';
             tbDate.style.display = 'none';
-            cityMain.style.display = 'table';
+            tbCity.style.display = 'table';
 
         });
 
-    }// else
-	
-});//DOMContentLoaded
+    }
+
+});

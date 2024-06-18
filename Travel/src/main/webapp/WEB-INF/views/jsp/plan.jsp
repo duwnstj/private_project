@@ -77,22 +77,24 @@
 
 			
             <ul class="tab_menu2">
-<div class="country_main">
+<table class="tb_country">
 
-        <div class="country_img"><img src="../../..${flagPath}" alt="${nationalName}"></div>
+        <td class="country_img"><img src="../../..${flagPath}" alt="${nationalName}"></td>
     
 
-        <div class="country_name">&nbsp; &nbsp;${nationalName}</div>
+        <td class="country_name">&nbsp; &nbsp;${nationalName}</td>
 
-        <div class="country_time">시차 &nbsp;${timeDifference}</div>
-</div>
+    <tr>
+        <td class="country_time">시차 &nbsp;${timeDifference}</td>
+    </tr>
+</table>
                 
             <div class="C_container">
                 
                 <div class="select_date"> 일정을 선택해 주세요</div>
                 
-                <div class="calendar_container">
-                    <div class="calendar_header">
+                <div class="calendar-container">
+                    <div class="calendar-header">
                         <button id="prevBtn">
                             <i class="fa-solid fa-circle-chevron-left fa-2xl"></i>
                         </button>
@@ -103,7 +105,7 @@
                         </button>
                     </div>
                     
-                    <div class="calendar_days">
+                    <div class="calendar-days">
                         <div class="day1">일</div>
                         <div class="day">월</div>
                         <div class="day">화</div>
@@ -118,12 +120,12 @@
                 </div>
             </div>
             
-                <div class="city_main">
-                        <div class="national_name">${nationalName}</div>
-                        <div>
-                            <input type="text" id="placeSearch" placeholder="장소 검색" />
-                        </div>
-                        <div>
+                <table class="tb_city">
+                    <tr>
+                        <th class="c_name">${nationalName}</th>
+                    </tr>
+                    <tr>
+                        <td>
                             <ul id="city_list" class="city_list">
                             
                             <c:forEach var="C" items="${cityList}" varStatus="loop">
@@ -139,16 +141,16 @@
 			                </li>
 			                </c:forEach>
 			                </ul>
-			            </div>
-                </div>
+			            </td>
+                    </tr>
+                </table>
             </ul>
         </div>
 		    <div id="map"></div>
 	</div>
 	
 	<%-- 외부 javascript 파일 연결 --%>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQ4RyCuYJe7JbBpsNsi3_CUlpNlsKxOe8"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQ4RyCuYJe7JbBpsNsi3_CUlpNlsKxOe8&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDV8uAIL5ZSZg_tZUBTRP557Q7wwf2XqT4"></script>
     
 	<script 
 	    src="https://kit.fontawesome.com/9d75e77952.js"crossorigin="anonymous">

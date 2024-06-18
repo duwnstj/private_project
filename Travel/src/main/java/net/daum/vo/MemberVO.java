@@ -18,6 +18,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,7 +27,6 @@ import lombok.ToString;
 
 @Setter
 @Getter
-@ToString
 @Entity
 @Table(name="member")
 @EqualsAndHashCode(of="member_id")
@@ -34,12 +35,15 @@ public class MemberVO {
 	@Id
 	private String member_id;
 	
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="chat_no")//여기서 지정하는 것이 외래키 이름.
     private ChatVO chatVO;
 	
 	@OneToMany(mappedBy = "memberVO",cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<PlanVO> planVO = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "memberVO",cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<Community_boardVO> community_boardVO = new ArrayList<>();
 	
 	private String member_name;
 	private String resident_id;

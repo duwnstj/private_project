@@ -55,6 +55,12 @@ public class PostmakeController {
 	public String post_make_ok(@RequestParam("uploadFile2") MultipartFile[] files, Community_boardVO b,
 			@AuthenticationPrincipal UserDetails userDetails,
 			HttpServletRequest request) {
+		
+		 if (userDetails == null) {
+		        // 사용자 인증이 되어 있지 않은 경우 처리 (예: 로그인 페이지로 리다이렉트)
+			 	
+		        return "redirect:/login";
+		    }
 
 		String uploadFolder = request.getServletContext().getRealPath("upload");
 		

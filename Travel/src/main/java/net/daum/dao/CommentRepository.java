@@ -12,7 +12,7 @@ public interface CommentRepository extends JpaRepository<Cm_CommentVO, Long> {
 
 	List<Cm_CommentVO> findByCommunityBoardMateno(Long mateno);
 	
-	void deleteByCommentNo(Long commentNo);;
+	void deleteByCommentNo(Long commentNo);
 
 	
 

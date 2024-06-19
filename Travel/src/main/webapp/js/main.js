@@ -98,6 +98,7 @@ document.addEventListener("DOMContentLoaded", function() {
             $.ajax({
                 type: 'POST',
                 url: '/comments/add/' + mateno,
+                
                 beforeSend: function(xhr){
         			 xhr.setRequestHeader(header, token);
         		},

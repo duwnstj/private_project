@@ -36,9 +36,6 @@ public class CityVO {
 	@Column(name= "longitude", nullable= false)
 	private double longitude;// 경도
 	
-	@Column(name= "city_info", nullable= true, length= 4000)
-	private String cityInfo;
-	
 	@Column(name= "capital_city", nullable= true)
 	private String capitalCity;
 	

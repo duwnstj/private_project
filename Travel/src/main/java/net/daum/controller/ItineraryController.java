@@ -27,29 +27,32 @@ public class ItineraryController {
 
 	@Autowired
     private PlanService planservice;
+	
 	@Autowired
 	private MemberService memberService;
 	
 	@PostMapping("/itinerary/{nationalCode}")
 	@ResponseBody
 	public ModelAndView itinerary(@PathVariable String nationalCode,
+			                      @AuthenticationPrincipal UserDetails userDetails,
                                   @RequestParam("departureDate") Date departureDate,
                                   @RequestParam("arrivalDate") Date arrivalDate,
                                   @RequestParam("selectedCityCodes") List<String> selectedCityCodes,
-                                  @AuthenticationPrincipal UserDetails userDetails) {
+	                              @RequestParam("placeLatitude") double placeLatitude,
+	                              @RequestParam("placeLongitude") double placeLongitude,
+	                              @RequestParam("placeName") String placeName)
+	                              {
         
 		NationalVO nv= this.planservice.findNational(nationalCode);// 국가코드로 국가정보를 NationalVO에서 find
         PlanVO p= new PlanVO();// planVO에 저장하기 위한 planVO p 객체 생성?
-        
-        String username=userDetails.getUsername();	
-       
-		MemberVO m= this.memberService.idCheck(username);
-        
+        String username=userDetails.getUsername();
+        MemberVO m= this.memberService.idCheck(username);
         
         p.setArrivalDate(arrivalDate);
         p.setDepartureDate(departureDate);
         p.setMemberVO(m);
-        this.planservice.insertPlan(p);// 일정 저장 및 생성
+        
+        this.planservice.insertPlan(p);// 일정 저장
         
         ModelAndView mv= new ModelAndView();// modelAndView 객체 생성
         mv.setViewName("/jsp/itinerary");// 뷰페이지 설정
@@ -63,6 +66,9 @@ public class ItineraryController {
         	    d.setPlan(p);
         	    // 일정번호 설정
         	    d.setCity(c);
+        	    d.setPlaceLatitude(placeLatitude);
+        	    d.setPlaceLongitude(placeLongitude);
+        	    d.setPlaceName(placeName);
         	    this.planservice.insertDestination(d);
         	}
         }

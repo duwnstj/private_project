@@ -39,6 +39,9 @@ public class CityVO {
 	@Column(name= "capital_city", nullable= true)
 	private String capitalCity;
 	
+	@Column(name= "city_image", nullable= true)
+	private String cityImage;// 도시 대표 이미지
+	
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn (name="national_code")

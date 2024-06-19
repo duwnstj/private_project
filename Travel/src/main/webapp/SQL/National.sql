@@ -6,7 +6,7 @@ select * from destination;
 drop table plan;
 drop table city;
 drop table destination;
-
+ALTER TABLE city DROP COLUMN city_info;
 
 insert into national values ('KR', '/images/flag/KOR.gif', '대한민국', '0:00');
 insert into national values ('JP', '/images/flag/JPN.gif', '일본', '0:00');
@@ -26,6 +26,7 @@ insert into national values ('ES', '/images/flag/ESP.gif', '스페인', '-7:00')
 insert into national values ('IT', '/images/flag/ITA.gif', '이탈리아', '-7:00');
 insert into national values ('FR', '/images/flag/FRA.gif', '프랑스', '-7:00');
 
+update city set city_image= '/images/city/seoul.jpeg' where city_code= 'SEL';
 -- 아시아
 insert into City values ('SEL', 'Y', '서울', '37.566826', '126.978652', 'KR');
 insert into City values ('PUS', '', '부산', '35.179820', '129.075087', 'KR');

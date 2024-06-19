@@ -65,7 +65,7 @@
                         <div>${nationalName}</div>
                         </div>
                             <div class="planCityName" id="planCityName">${city.cityName}</div>
-                                <div class="planCityInfo" if="planCityInfo">${city.cityInfo}</div>
+
                     </c:forEach>
                     </div>                
                 </div>

@@ -39,4 +39,13 @@ public class DestinationVO {
 	@ManyToOne(fetch= FetchType.LAZY)
 	@JoinColumn(name= "city_code", referencedColumnName= "city_code")
 	private CityVO city;
+	
+	@Column(name= "place_name", nullable= false)
+	private String placeName;
+	
+	@Column(name= "place_latitude", nullable= false)
+	private double placeLatitude;
+	
+	@Column(name= "place_longitude", nullable= false)
+	private double placeLongitude;
 }

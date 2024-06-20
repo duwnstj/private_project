@@ -14,6 +14,8 @@ public interface CommentRepository extends JpaRepository<Cm_CommentVO, Long> {
 	
 	void deleteByCommentNo(Long commentNo);
 
+	Cm_CommentVO findBycommentNo(Long commentNo);
+
 	
 
 

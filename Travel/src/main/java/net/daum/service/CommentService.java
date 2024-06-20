@@ -18,6 +18,10 @@ public interface CommentService {
 
 	void deleteComment(Long commentNo);
 
+	Cm_CommentVO getCommentById(Long commentNo);
+
+	
+
 	
 
 

@@ -58,6 +58,16 @@ public class CommentDAOImpl implements CommentDAO {
 	}
 
 
+	@Override
+	public Cm_CommentVO getCommentById(Long commentNo) {
+		
+		return this.commentRepo.findBycommentNo(commentNo);
+	}
+
+
+
+
+
 
 	
 

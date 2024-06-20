@@ -2,9 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../include/header.jsp" />
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="_csrf_header" content="${_csrf.headerName}">
 <meta name="_csrf" content="${_csrf.token}">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.1/font/bootstrap-icons.min.css">  
 <link rel="stylesheet" href="../css/main.css">
 
 <h2 class="user-font">함께 여행을 떠나는 친구를 찾는 공간</h2>
@@ -51,7 +54,7 @@
         <div class="instagram-post">
             <div class="post-content">
                 <img src="../images/profile.jpg" alt="프로필 사진">
-                <p class="user-id">아이디:${p.memberVO.member_id}</p>
+                <p class="user-id">${p.memberVO.member_id}</p>
 
                 <!-- 수정 및 삭제 토글 버튼 -->
                 <button type="button" class="toggle-button">옵션</button>
@@ -78,7 +81,10 @@
                 </div>
             </div>
             <div class="interactions">
-                <button class="like-button" name="like" id="like" onclick="post_like()">좋아요</button>
+                <button class="like-button" name="like" id="like" >
+                <i class="bi bi-heart" id="like-icon"></i>
+				
+               좋아요</button>
                 
                 <!-- 게시물에 대한 댓글 버튼 -->
                 <button class="comment-button" data-mateno="${p.mateno}">댓글</button>   
@@ -87,6 +93,7 @@
             <!-- 댓글 입력 폼 및 댓글 목록 -->
              <div id="comment-section-${p.mateno}" class="comment-section" style="display: none;">
                     <form class="commentForm" data-mateno="${p.mateno}">
+                    <input type="hidden" name="commentWriter" id="commentWriter">
                         <input type="text" class="commentText" placeholder="댓글 입력">
                         <button type="submit">댓글 추가</button>
                     </form>

@@ -90,6 +90,7 @@ document.addEventListener("DOMContentLoaded", function() {
         event.preventDefault();
         var mateno = $(this).data('mateno');
         var commentText = $(this).find('.commentText').val().trim();
+        
 
 	var header = $("meta[name='_csrf_header']").attr('content');
     var token = $("meta[name='_csrf']").attr('content');  
@@ -104,7 +105,8 @@ document.addEventListener("DOMContentLoaded", function() {
         		},
                 contentType: 'application/json',
                 data: JSON.stringify({
-                    commentText: commentText
+                    commentText: commentText,
+                    
                 }),
                 success: function(response) {
                     console.log('댓글이 성공적으로 추가되었습니다.');
@@ -140,6 +142,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     commentText: newCommentText
                 }),
                 success: function(response) {
+					
                     console.log('댓글이 성공적으로 수정되었습니다.');
                     loadComments(mateno);
                 },
@@ -154,7 +157,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     $(document).on('click', '.delete-comment-button', function() {
         var commentNo = $(this).data('commentno');
-        var mateno = $(this).data('mateno');
 
 		var header = $("meta[name='_csrf_header']").attr('content');
     	var token = $("meta[name='_csrf']").attr('content');  
@@ -209,3 +211,17 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
+
+   $("#like").click(function () {
+      let ChkLike = $('#like-icon');
+      if (ChkLike.hasClass("bi-heart")) { /* 빈 하트 */
+         ChkLike.removeClass("bi-heart");
+         ChkLike.addClass("bi-heart-fill");
+      } else { /* 채운 하트 */
+           ChkLike.removeClass("bi-heart-fill");
+            ChkLike.addClass("bi-heart");
+      };
+   });
+
+

@@ -43,6 +43,13 @@ public class CommentServiceImpl implements CommentService {
 		this.commentdao.deleteComment(commentNo);
 	}
 
+	@Override
+	public Cm_CommentVO getCommentById(Long commentNo) {
+		
+		return commentdao.getCommentById(commentNo);
+	}
+
+	
 
 
 

@@ -19,6 +19,10 @@ public interface CommentDAO {
 
 	void deleteComment(Long commentNo);
 
+	Cm_CommentVO getCommentById(Long commentNo);
+
+
+
 	
 	
 

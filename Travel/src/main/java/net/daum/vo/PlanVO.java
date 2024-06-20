@@ -2,6 +2,8 @@ package net.daum.vo;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -48,7 +52,7 @@ public class PlanVO {
 	
 	@Column(name= "arrival_date", nullable = false)
 	private Date arrivalDate;// 도착일
-	
+
 	@CreationTimestamp// 하이버네이트로 등록시점 날짜값 생성
 	@Column(name= "plan_date", nullable = false)
     private Timestamp planDate;// 일정생성날짜
@@ -56,4 +60,13 @@ public class PlanVO {
 	@ManyToOne
     @JoinColumn(name = "member_id")
     private MemberVO memberVO;
+	
+	@ManyToMany
+	@JoinTable(
+			name= "plan_city",
+			joinColumns= @JoinColumn(name= "plan_no"),
+			inverseJoinColumns= @JoinColumn(name= "city_code")
+			)
+	private List<CityVO>cities= new ArrayList<>();
+
 }

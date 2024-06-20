@@ -2,11 +2,15 @@ select *  from national;
 select * from city;
 select * from plan;
 select * from destination;
+select * from PLAN_CITY;
+select * from MEMBER;
 
 drop table plan;
 drop table city;
 drop table destination;
-ALTER TABLE city DROP COLUMN city_info;
+
+ALTER TABLE Destination DROP COLUMN city_code;
+
 
 insert into national values ('KR', '/images/flag/KOR.gif', '대한민국', '0:00');
 insert into national values ('JP', '/images/flag/JPN.gif', '일본', '0:00');

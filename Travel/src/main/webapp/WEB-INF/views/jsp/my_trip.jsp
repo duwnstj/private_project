@@ -1,5 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix= "c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <jsp:include page="../include/header.jsp" />
 
 <meta charset="UTF-8">
@@ -25,45 +28,27 @@
 	</button>
 	<p id="my_trip_p">My Trip</p>
 	<%-- 게시글 영역 --%>
-	<div class="posts">
-		<div class="post" id="post1">
-			<img src="" alt="게시글 썸네일" class="thumbnail">
-		</div>
-
-		<div class="post" id="post2">
-			<img src="../images/thumbnail2.jpg" alt="게시글 썸네일" class="thumbnail">
-		</div>
-
-		<div class="post" id="post3">
-			<img src="../images/thumbnail3.jpg" alt="게시글 썸네일" class="thumbnail">
-		</div>
-
-		<div class="post" id="post4">
-			<img src="../images/thumbnail4.jpg" alt="게시글 썸네일" class="thumbnail">
-		</div>
-		<div class="post" id="post5">
-			<img src="../images/thumbnail5.jpg" alt="게시글 썸네일" class="thumbnail">
-		</div>
-
-		<div class="post" id="post6">
-			<img src="../images/thumbnail6.jpg" alt="게시글 썸네일" class="thumbnail">
-		</div>
-
-		<div class="post" id="post7">
-			<img src="../images/thumbnail7.jpg" alt="게시글 썸네일" class="thumbnail">
-		</div>
-
-		<div class="post" id="post8">
-			<img src="../images/thumbnail8.jpg" alt="게시글 썸네일" class="thumbnail">
-		</div>
-
-	</div>
+    <div class="posts" id="postsContainer">
+        <c:forEach var="plan" items="${planList}" varStatus="loop">
+    <div class="post">
+        <h2>${loop.index + 1}번째 일정</h2> <!-- loop.index는 0부터 시작하므로 +1을 해서 1부터 시작하는 일정 순서로 표시 -->
+        여행 도시
+        <ul id="cityList-${plan.planNo}" class="city-list">
+            <c:forEach var="city" items="${plan.cities}">
+                <li data-city-code="${city.cityCode}" data-city-image="${city.cityImage}">
+                    ${city.cityName}
+                </li>
+            </c:forEach>
+        </ul>
+        <div class="dates">
+            <p><fmt:formatDate value="${plan.departureDate}" pattern="yyyy-MM-dd" />~<fmt:formatDate value="${plan.arrivalDate}" pattern="yyyy-MM-dd" /></p>
+        </div>
+    </div>
+</c:forEach>
+    </div>
 
 <jsp:include page="../include/footer.jsp"/>
 
 <%-- 외부 javascript 파일 연결 --%>
-
-
-<script src="../js/posts.js"></script>
 <script src="../js/mytrip.js"></script>
 <script src="https://kit.fontawesome.com/9d75e77952.js"crossorigin="anonymous"></script>

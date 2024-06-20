@@ -1,7 +1,9 @@
 package net.daum.vo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -43,7 +45,7 @@ public class CityVO {
 	private String cityImage;// 도시 대표 이미지
 	
 	@JsonIgnore
-	@ManyToOne
+	@ManyToOne (cascade=CascadeType.ALL, fetch= FetchType.LAZY)
 	@JoinColumn (name="national_code")
 	private NationalVO nationalCode;
 }

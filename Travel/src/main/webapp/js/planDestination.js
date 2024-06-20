@@ -136,7 +136,7 @@ function initMap() {
             const input = document.getElementById("placeSearch");
             const options = {
                 componentRestrictions: { country: nationalCode },
-                fields: ["address_components", "geometry"],
+                fields: ["address_components", "geometry", "name"],
             };
 
             const autocomplete = new google.maps.places.Autocomplete(input, options);
@@ -157,19 +157,19 @@ function initMap() {
 				// hidden요소 생성 및 설정
 				const latInput= document.createElement('input');
 				latInput.type= 'hidden';
-				latInput.name= 'placeLatitude';
+				latInput.name= 'placeLatitude[]';
 				latInput.value= lat;
 				form.appendChild(latInput);// form에 추가
 				
 				const lngInput= document.createElement('input');
 				lngInput.type= 'hidden';
-				lngInput.name= 'placeLongitude';
+				lngInput.name= 'placeLongitude[]';
 				lngInput.value= lng;
 				form.appendChild(lngInput);
 				
 				const placeNameInput= document.createElement('input');
 				placeNameInput.type= 'hidden';
-				placeNameInput.name= 'placeName';
+				placeNameInput.name= 'placeName[]';
 				placeNameInput.value= placeName;
 				form.appendChild(placeNameInput);
 				

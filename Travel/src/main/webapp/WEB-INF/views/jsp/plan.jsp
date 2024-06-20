@@ -113,7 +113,7 @@ var nationalCode = "${nationalCode}";
                             <div class="day2">토</div>
                         </div>
                     
-                        <div class="calendar-dates" id="calendarDates"></div>
+                        <div class="calendar_dates" id="calendarDates"></div>
                         <div id="selectedDates" >
                         </div>
                     </div>
@@ -121,7 +121,7 @@ var nationalCode = "${nationalCode}";
             
                 <table class="city_main">
                     <tr>
-                        <th class="c_name">${nationalName}</th>
+                        <th class="country_name">${nationalName}</th>
                     </tr>
 
                     <tr>
@@ -141,7 +141,7 @@ var nationalCode = "${nationalCode}";
                     </tr>
                     <tr>
                     <td>
-                        <input type="text" id="placeSearch" placeholder="장소 검색" />
+                        <input type="text" id="placeSearch" placeholder="장소를 검색하여 지도에 추가해보세요." />
                     </td>
                     </tr>
                 </table>
@@ -157,6 +157,6 @@ var nationalCode = "${nationalCode}";
 	    src="https://kit.fontawesome.com/9d75e77952.js"crossorigin="anonymous">
 	</script>
 	<script src="../js/planDestination.js"></script>
-	<script src="../js/plancalendar.js"></script>
+	<script src="../js/planCalendar.js"></script>
 </body>
 </html>

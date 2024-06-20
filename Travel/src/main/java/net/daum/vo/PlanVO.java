@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -54,7 +53,7 @@ public class PlanVO {
 	
 	@Column(name= "arrival_date", nullable = false)
 	private Date arrivalDate;// 도착일
-	
+
 	@CreationTimestamp// 하이버네이트로 등록시점 날짜값 생성
 	@Column(name= "plan_date", nullable = false)
     private Timestamp planDate;// 일정생성날짜

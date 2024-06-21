@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,6 +26,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import net.daum.config.MyEntityListener;
 
 @Setter //setter()메서드 자동생성
 @Getter //getter()메서드 자동생성
@@ -39,6 +41,7 @@ import lombok.ToString;
 @Table(name="plan") //member 테이블 생성
 @EqualsAndHashCode(of="planNo")
 //equals(), hashCode(), canEqual() 메서드 자동생성
+@EntityListeners(MyEntityListener.class)
 public class PlanVO {
 	
 	@Id

@@ -8,7 +8,7 @@ select * from MEMBER;
 drop table plan;
 drop table city;
 drop table destination;
-
+drop table plan_city;
 ALTER TABLE Destination DROP COLUMN city_code;
 
 

@@ -44,25 +44,3 @@ body {
 	background-color: white;
 	color: #4174d9;
 }
-
-#btn_shcedule {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: rgba(0, 0, 0, 0.0);
-    color: #4174d9;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    border-radius: 8px;
-    margin-top: -390px;
-    margin-left: 1600px;
-}
-
-#btn_shcedule:hover {
-    color: white;
-}
-
-.thumbnail{
-	width: auto;
-	height: auto;
-}

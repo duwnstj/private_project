@@ -45,8 +45,8 @@
 			  <select name="find_field">
 				<option value="sboard_title"
 					<c:if test="${find_field=='sboard_title'}"> ${'selected'}</c:if>>제목</option>
-				<option value="sboard_writer"
-					<c:if test="${find_field=='sboard_writer'}"> ${'selected'}</c:if>>작성자</option>
+				<%-- <option value="sboard_writer"
+					<c:if test="${find_field=='sboard_writer'}"> ${'selected'}</c:if>>작성자</option> --%>
 				</select> <input type="search"  placeholder="국가/도시/회원ID 를(을) 입력하세요" name="find_name" id="find_name" value="${find_name}" /> 
 				<div class="s-button"> <input type="submit" value="검색" /> </div>
 			  </form>

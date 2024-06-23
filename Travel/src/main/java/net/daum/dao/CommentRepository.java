@@ -18,6 +18,8 @@ public interface CommentRepository extends JpaRepository<Cm_CommentVO, Long> {
 
 	
 
+	
+
 
 
 

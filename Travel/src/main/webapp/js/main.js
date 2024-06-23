@@ -122,38 +122,61 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    $(document).on('click', '.edit-comment-button', function() {
-        var commentNo = $(this).data('commentid');
-        var mateno = $(this).data('mateno');
-        var newCommentText = prompt('댓글을 수정하세요:', '');
-
-		var header = $("meta[name='_csrf_header']").attr('content');
-    	var token = $("meta[name='_csrf']").attr('content');  
+  $(document).on('click', '.edit-comment-button', function() {
+    var commentNo = $(this).data('commentid');
+    var mateno = $(this).data('mateno');
     
-        if (newCommentText !== null && newCommentText.trim() !== '') {
-            $.ajax({
-                type: 'PUT',
-                url: '/comments/update/' + commentNo,
-                beforeSend: function(xhr){
-        			 xhr.setRequestHeader(header, token);
-        		},
-                contentType: 'application/json',
-                data: JSON.stringify({
-                    commentText: newCommentText
-                }),
-                success: function(response) {
-					
-                    console.log('댓글이 성공적으로 수정되었습니다.');
-                    loadComments(mateno);
-                },
-                error: function(xhr, status, error) {
-                    console.error('댓글 수정 중 오류가 발생했습니다:', xhr.responseText);
-                }
-            });
-        } else {
-            alert('댓글 내용을 입력하세요.');
-        }
-    });
+    var header = $("meta[name='_csrf_header']").attr('content');
+    var token = $("meta[name='_csrf']").attr('content');
+
+	//권한 확인 요청
+	$.ajax({
+		type:'PUT',
+		url:'/comments/update/'+commentNo,
+		beforeSend:function(xhr){
+			xhr.setRequestHeader(header,token);
+		},
+		contentType:'application/json',
+		data:JSON.stringify({}),
+		success:function(response){
+			if(response === "권한 확인됨"){
+				var newCommentText = prompt('댓글을 수정하세요:','');
+				if(newCommentText !== null && newCommentText.trim()!==''){
+					//댓글 수정요청
+					$.ajax({
+						type:'PUT',
+						url:'/comments/update/'+commentNo,
+						beforeSend:function(xhr){
+							xhr.setRequestHeader(header,token);
+						},
+						contentType:'application/json',
+						data:JSON.stringify({
+							commentText:newCommentText
+						}),
+						success:function(response){
+							
+							loadComments(mateno);
+						},
+						error:function(xhr,status,error){
+							alert("댓글 수정 중 오류가 발생했습니다.");
+						}
+					});
+				}else{
+					alert('댓글 내용을 입력하세요.');
+				}
+			}
+		},
+		error:function(xhr,status,error){
+			alert(xhr.resposeText);
+			if(xhr.status ===403){
+				alert("댓글 수정 권한이 없습니다.");
+			}else{
+				alert("댓글 수정 중 오류가 발생했습니다.");
+			}
+		}
+	});
+	});
+           
 
     $(document).on('click', '.delete-comment-button', function() {
         var commentNo = $(this).data('commentno');
@@ -174,7 +197,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 },
                 error: function(xhr, status, error) {
                     console.error('댓글 삭제 실패:', error);
-                    alert('댓글 삭제에 실패했습니다.');
+                    alert('댓글 삭제 권한이없습니다.');
                 }
             });
         }

@@ -1,8 +1,8 @@
 package net.daum.controller;
 
 import java.io.PrintWriter;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -70,45 +70,61 @@ public class CommentController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
-	
+    
+    
     // 댓글 수정 기능
     @PutMapping("/update/{commentNo}")
-    public ResponseEntity<Cm_CommentVO> updateComment(@PathVariable Long commentNo, 
-    												@RequestBody Cm_CommentVO comment,
-    												@AuthenticationPrincipal UserDetails userDetails,
-    												HttpServletResponse response
-    									
+    public ResponseEntity<String> updateComment(@PathVariable Long commentNo, 
+    												@RequestBody Map<String,String>request,
+    												@AuthenticationPrincipal UserDetails userDetails
+    												
     												)throws Exception {
-    	  response.setContentType("text/html;charset=UTF-8");
-	      PrintWriter out=response.getWriter();
 
 	      //현재 인증된 사용자의 Id(username)가져오기
     	String username=userDetails.getUsername();
     	
+    	//기존 댓글 가져오기
+    	Cm_CommentVO existingComment = commentService.getCommentById(commentNo);
+    	
+    	if(!username.equals(existingComment.getCommentWriter())) {
+    		return ResponseEntity.status(HttpStatus.FORBIDDEN).body("댓글 수정 권한이 없습니다.");
+    		
+    	}
+    	
+    	if(request.containsKey("commentText")) {
+    		String newCommentText = request.get("commentText");
+    		existingComment.setCommentText(newCommentText);
+    	
         try {
-        	Cm_CommentVO updatedComment = commentService.updateComment(commentNo,comment);
-            if (!username.equals(updatedComment.getCommentWriter())){
-        		System.out.println(username);
-        		System.out.println(updatedComment.getCommentWriter());
-    	        out.println("<script>");
-    	        out.println("alert('댓글 수정 권한이 없습니다.');");
-    	        out.println("window.location.href = '/community_board';");
-    	        out.println("</script>");
-    	        return null;
-    	    }else {
-    	    	
-    	    	return ResponseEntity.ok(updatedComment);
+        	Cm_CommentVO updatedComment = commentService.updateComment(commentNo,existingComment);
+           return ResponseEntity.ok("댓글이 성공적으로 수정되었습니다.");
+    	    }catch(Exception e) {
+    
+    	    	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("댓글 수정 중 오류가 발생했습니다.");
     	    }
+    	}else {
+    		return ResponseEntity.ok("권한 확인됨");
+    	}
             
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-	    
     }
 	
     // 댓글 삭제 기능
     @DeleteMapping("/delete/{commentNo}")
-    public ResponseEntity<Void> deleteComment(@PathVariable Long commentNo) {
+    public ResponseEntity<String> deleteComment(@PathVariable Long commentNo,
+    										@AuthenticationPrincipal UserDetails userDetails
+    										) {
+          
+	      String username=userDetails.getUsername();
+		
+	      //기존 댓글 가져오기 
+	      Cm_CommentVO existingComment = commentService.getCommentById(commentNo);
+	      
+		
+    	//댓글 작성자 확인
+	      if(!username.equals(existingComment.getCommentWriter())){
+	    	  return ResponseEntity.status(HttpStatus.FORBIDDEN).body("댓글 삭제 권한이 없습니다.");
+	      }
+	      
         try {
             commentService.deleteComment(commentNo);
             return ResponseEntity.noContent().build();

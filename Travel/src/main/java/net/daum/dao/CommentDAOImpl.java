@@ -65,6 +65,24 @@ public class CommentDAOImpl implements CommentDAO {
 	}
 
 
+	@Override
+	public Cm_CommentVO insertComment(Cm_CommentVO comment, Long parentCommentId) {
+		 Cm_CommentVO parentComment = commentRepo.findById(parentCommentId).orElseThrow();
+	        comment.setParentComment(parentComment);
+	        return commentRepo.save(comment);
+	}
+
+
+	@Override
+	public List<Cm_CommentVO> getRepliesByParentComment(Cm_CommentVO parentComment) {
+		
+		return commentRepo.findByParentComment(parentComment);
+	}
+
+
+	
+
+
 
 
 

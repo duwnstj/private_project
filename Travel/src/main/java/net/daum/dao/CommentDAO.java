@@ -21,6 +21,11 @@ public interface CommentDAO {
 
 	Cm_CommentVO getCommentById(Long commentNo);
 
+	Cm_CommentVO insertComment(Cm_CommentVO comment, Long parentCommentId);
+
+
+	List<Cm_CommentVO> getRepliesByParentComment(Cm_CommentVO parentComment);
+
 
 
 	

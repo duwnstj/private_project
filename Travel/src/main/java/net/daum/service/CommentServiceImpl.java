@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import net.daum.dao.CommentDAO;
 import net.daum.vo.Cm_CommentVO;
+import net.daum.vo.Community_boardVO;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -49,6 +50,19 @@ public class CommentServiceImpl implements CommentService {
 		return commentdao.getCommentById(commentNo);
 	}
 
+	@Override
+	public Cm_CommentVO insertComment(Cm_CommentVO comment, Long parentCommentId) {
+		
+		return commentdao.insertComment(comment,parentCommentId);
+	}
+
+	@Override
+	public List<Cm_CommentVO> getRepliesByParentComment(Cm_CommentVO parentComment) {
+		
+		return commentdao.getRepliesByParentComment(parentComment);
+	}
+
+	
 	
 
 

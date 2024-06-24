@@ -18,7 +18,13 @@ public interface CommentService {
 
 	void deleteComment(Long commentNo);
 
+	
+
+	Cm_CommentVO insertComment(Cm_CommentVO comment, Long parentCommentId);
+
 	Cm_CommentVO getCommentById(Long commentNo);
+
+	List<Cm_CommentVO> getRepliesByParentComment(Cm_CommentVO parentComment);
 
 	
 

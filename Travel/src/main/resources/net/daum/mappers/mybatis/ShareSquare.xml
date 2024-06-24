@@ -46,15 +46,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update> 
 
 	
-  <!-- 공유후기 수정 완료
+  <!-- 공유후기 수정 완료	 -->	
   <update id="se_edit">
     update Share_Square set sboard_writer=#{sboard_writer},sboard_content=#{sboard_content}, sboard_title=#{sboard_title}
     where sboard_no=#{sboard_no} 
-  </update>	 -->	
+  </update>
   
-  <!-- 공유후기 삭제
+  <!-- 공유후기 삭제 -->
   <delete id="se_del">
     delete from Share_Square where sboard_no=#{sboard_no}
-  </delete> -->
+  </delete>
 
 </mapper>

@@ -99,7 +99,7 @@ public class ShareSquareController {
 	//공유한 후기 게시판에 띄우기 & 여행 후기 첫 화면
 	@GetMapping("/ShareSquare_plist")
 	public ModelAndView ShareSquare_plist(ShareSquareVO s,PageVO p, ShareSquareFileVO sf, HttpServletRequest request,
-			HttpServletResponse response, HttpSession session) throws Exception {
+			HttpServletResponse response) throws Exception {
 		response.setContentType("text/html;charset=UTF-8");
 
 		int page=1;

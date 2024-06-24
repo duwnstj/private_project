@@ -26,16 +26,18 @@
 
 <div class="posts" id="postsContainer">
     <c:forEach var="plan" items="${planList}" varStatus="loop">
-        <div class="post">
-            <div id="cityList-${plan.planNo}" class="city-list">
-                <c:forEach var="nationalName" items="${nationalsByPlan[loop.index]}">
-                    <div class="cityImage">
+        <div class="post" id="post_${plan.planNo}" data-plan-no="${plan.planNo}">
+        <div class="cityImage">
                         <img src="${firstCityImages[loop.index]}" alt="${nationalNameList} 첫 번째 도시 이미지">
                     </div>
+            <div id="cityList-${plan.planNo}" class="citylist">
+                <c:forEach var="nationalName" items="${nationalsByPlan[loop.index]}">
+                    
                     <div class="nationalName">
                         ${nationalName}
                     </div>
-                </c:forEach>     
+                </c:forEach>  
+                   
                 <div class="cityNames">
                     <c:forEach var="city" items="${plan.cities}">
                         <div data-city-code="${city.cityCode}">
@@ -43,11 +45,21 @@
                         </div>
                     </c:forEach>
                 </div>
-            </div>
-            <div class="dates">
+                
+                <div class="dates">
                 <p><fmt:formatDate value="${plan.departureDate}" pattern="yyyy-MM-dd" />~<fmt:formatDate value="${plan.arrivalDate}" pattern="yyyy-MM-dd" /></p>
+                </div>
+                </div>
+                <!-- 각 post를 클릭했을 때 form을 전송하는 버튼 추가 -->
+            <form id="form_${plan.planNo}" action="/itinerary/view" method="post">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                <input type="hidden" name="planNo" value="${plan.planNo}">
+                <input type="hidden" name="departureDate" value="${plan.departureDate}">
+                <input type="hidden" name="arrivalDate" value="${plan.arrivalDate}">
+                <button type="button" class="viewDetailsBtn">View Details</button>
+            </form>
             </div>
-        </div>
+
     </c:forEach>
 </div>
 

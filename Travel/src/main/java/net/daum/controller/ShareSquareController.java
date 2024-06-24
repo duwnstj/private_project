@@ -120,7 +120,7 @@ public class ShareSquareController {
 		p.setStartrow((page-1)*3+1);//시작행 번호
 		p.setEndrow(p.getStartrow()+limit-1);//끝행번호
 			
-		List<ShareSquareVO> slist = this.sharesquareService.getshareSquareList(p);	
+		//List<ShareSquareVO> slist = this.sharesquareService.getshareSquareList(p);	
 	
 		/* 페이징 연산*/		
 		int maxpage = (int)((double)listCount/limit+0.95);//총페이지 수
@@ -130,7 +130,7 @@ public class ShareSquareController {
 		
 		//리스트 불러오기
 		ModelAndView pmav=new ModelAndView();
-		pmav.addObject("share",slist);
+		//pmav.addObject("share",slist);
 		pmav.addObject("listcount", listCount);
 		pmav.addObject("page", page);
 		pmav.addObject("startpage", startpage);

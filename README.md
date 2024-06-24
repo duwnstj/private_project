@@ -16,5 +16,3 @@
 ![채팅](https://github.com/JinhaakM/travel_backend/assets/167280525/90a5cd9d-d06a-4b21-8851-ed325ed8523b)
 
 <br><br>
-
-<h2>진학 준서  크로스 세 번 째 병합 충돌 어케 시켜</h2>

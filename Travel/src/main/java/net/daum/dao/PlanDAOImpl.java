@@ -4,8 +4,10 @@ package net.daum.dao;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import net.daum.vo.CityVO;
 import net.daum.vo.DestinationVO;
@@ -51,5 +53,4 @@ public class PlanDAOImpl implements PlanDAO {
 	public List<PlanVO> allUserPlan() {
 		return this.planRepo.allUserPlan();
 	}
-
 }

@@ -44,4 +44,5 @@ public class PlanServiceImpl implements PlanService {
 		return this.planDao.allUserPlan();
 	}
 
+	
 }

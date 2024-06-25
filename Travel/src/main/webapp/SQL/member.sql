@@ -4,7 +4,7 @@ select * from persistent_logins;
 select * from member;
 delete member where member.member_id='duwnstj';
 
-select * from plan;
+select * from plan_city;
 drop table member;
 drop table chat;
 drop table message;

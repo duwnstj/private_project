@@ -417,21 +417,19 @@ public class MainController {
 	@GetMapping("/homepageSearch")
 	public ModelAndView homepageSearch(String searchInput) {
 		
-		//System.out.println(searchInput);
 		List<PlanVO> p=new ArrayList();
 		p=this.planService.allUserPlan();
 		int busanGo=0;
-		int seoulGo=0;
+		int seoulGo=0;//웹소켓을 통해 실시간으로 변경되는 값.
 		int tokyoGo=0;
 		
 		for(int i=0; i<p.size(); i++) {
-			int a= p.get(i).getCities().size();//한 계획 안에 들어 있는 여러 여행지
+			int a= p.get(i).getCities().size();
 			
-			for(int j=0; j<a; j++) {//그 여행지마다 갯수 지정.
+			for(int j=0; j<a; j++) {
 				if(p.get(i).getCities().get(j).getCityCode().equals("PUS")) busanGo++;
 				if(p.get(i).getCities().get(j).getCityCode().equals("SEL")) seoulGo++;
 				if(p.get(i).getCities().get(j).getCityCode().equals("TYO")) tokyoGo++;	
-				//System.out.println(p.get(i).getCities().get(j).getCityCode());
 			}
 			
 		}

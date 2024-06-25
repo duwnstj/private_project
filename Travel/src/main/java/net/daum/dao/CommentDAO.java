@@ -26,6 +26,8 @@ public interface CommentDAO {
 
 	List<Cm_CommentVO> getRepliesByParentComment(Cm_CommentVO parentComment);
 
+	Cm_CommentVO updateReply(Long commentNo, Cm_CommentVO existingComment) throws Exception;
+
 
 
 	

@@ -65,7 +65,7 @@ public class Cm_CommentVO {
 	@JsonBackReference(value="parentComment")
 	private Cm_CommentVO parentComment; // 부모 댓글 ID(대댓글을 위해서)
 	
-	@OneToMany(mappedBy = "parentComment",cascade = CascadeType.ALL,orphanRemoval = true)
+	@OneToMany(mappedBy = "parentComment",cascade=CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
 	@JsonManagedReference(value="parentComment")
 	private List<Cm_CommentVO> childComments; //자식 댓글들 
 	

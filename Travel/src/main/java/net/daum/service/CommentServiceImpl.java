@@ -62,6 +62,12 @@ public class CommentServiceImpl implements CommentService {
 		return commentdao.getRepliesByParentComment(parentComment);
 	}
 
+	@Override
+	public Cm_CommentVO updateReply(Long commentNo, Cm_CommentVO existingComment) throws Exception {
+		
+		return commentdao.updateReply(commentNo,existingComment);
+	}
+
 	
 	
 

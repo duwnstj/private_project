@@ -26,6 +26,8 @@ nocycle;
 select mate_no_seq.nextval from dual;
 
 drop sequence mate_no_seq;
+drop sequence cmimg_no_seq;
+drop sequence comment_no_seq
 
 
 drop table community_board;
@@ -36,8 +38,10 @@ nocache; --nocache로 수정 // community_board
 alter sequence mate_no_seq
 nocycle; --nocycle로 수정
 
---생성된 gongji_no_seq시퀀스 번호값 확인
+--생성된 시퀀스 번호값 확인
 select mate_no_seq.nextval as "시퀀스 번호값" from dual;
+select cming_no_seq.nextval as "시퀀스 번호값" from dual;
+select comment_no_seq.nextval as "시퀀스 번호값" from dual;
 
  
 
@@ -47,7 +51,7 @@ alter sequence cmimg_no_seq
 nocycle;
 
 
-alter sequence repl_no_seq
-nocache; --댓글 시퀀스 Cm_repl
-alter sequence repl_no_seq
+alter sequence comment_no_seq
+nocache; --댓글 시퀀스 Cm_comment
+alter sequence comment_no_seq
 nocycle;

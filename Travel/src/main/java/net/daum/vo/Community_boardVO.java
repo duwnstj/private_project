@@ -21,7 +21,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -65,7 +65,7 @@ public class Community_boardVO {
 	private String mt_hashtag; //해시태그
 	
 	@OneToMany(mappedBy="communityBoard", cascade = CascadeType.ALL,orphanRemoval = true)
-	@JsonBackReference
+	@JsonManagedReference(value="communityBoard")
 	private List<Cm_CommentVO> comments;
 	
 	

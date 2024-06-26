@@ -1,6 +1,7 @@
 package net.daum.controller;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -130,6 +131,7 @@ public class PostmakeController {
 		
 		String username=userDetails.getUsername();
 		MemberVO m= this.memberService.idCheck(username);
+		
 		int limit = 7; // Items per page
 	    
 	    Page<Community_boardVO> postPage;
@@ -164,7 +166,6 @@ public class PostmakeController {
 	    po.addObject("currentPage", page);
 	    po.addObject("searchInput",searchInput);
 	    po.addObject("searchType",searchType);
-	    po.addObject("userid",username);
 	    po.setViewName("/jsp/main");
 	  
 	    return po;
@@ -173,11 +174,24 @@ public class PostmakeController {
 	  
 	 //게시물 수정폼으로 이동
 	 @PostMapping("/post_edit")
-	public ModelAndView postedit(@RequestParam("mateno") Long mateno) {
+	public ModelAndView postedit(@RequestParam("mateno") Long mateno,
+								@AuthenticationPrincipal UserDetails userDetails,
+								HttpServletResponse response)throws Exception {
+		 
+		 response.setContentType("text/html;charset=UTF-8");
+			PrintWriter out=response.getWriter();
 		 //게시글의 등록된 게시물의 정보를 조회하여 가져오는 로직
 		 Community_boardVO post=postService.getPostInfo(mateno);
 		 
-		 ModelAndView am = new ModelAndView(); 
+		 
+		
+		 String username=userDetails.getUsername();
+			MemberVO m= this.memberService.idCheck(username);
+			
+			 ModelAndView am = new ModelAndView();
+			if(username.equals(post.getMemberVO().getMember_id())) {
+		 
+		 
 		 	am.addObject("postId",post.getMateno());
 		 	am.addObject("mate_title", post.getMate_title());
 		 	am.addObject("mate_cont",post.getMate_cont());
@@ -187,6 +201,14 @@ public class PostmakeController {
 			am.setViewName("/jsp/postEdit");
 			
 				 return am;
+	 }else {
+		 out.println("<script>");
+		 out.println("alert('게시글 수정을 할 수 없습니다!');");
+		 out.println("window.location.href = '/community_board';");
+		 out.println("</script>");
+		 
+		 return null;
+	 }
 	 }
 	 
 		
@@ -194,6 +216,7 @@ public class PostmakeController {
 		  //수정 완료
 	  @PostMapping("post_edit_ok")
 	    public ModelAndView post_edit_ok(@RequestParam("mateno") Long mateno,
+	    		
 	                                     Community_boardVO cb, @RequestParam("uploadFile") List<MultipartFile> uploadFile,
 	                                     @RequestParam(value = "deleteImages", required = false) List<String> deleteImages,
 	                                     HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -263,15 +286,34 @@ public class PostmakeController {
 	
 		  //게시물 삭제 
 		  @PostMapping("post_del_ok")
-		  public String post_del_ok(@RequestParam("mateno") Long mateno, HttpServletResponse response, HttpServletRequest request) 
+		  public String post_del_ok(@RequestParam("mateno") Long mateno, 
+				  					HttpServletResponse response, 
+				  					HttpServletRequest request,
+				  					@AuthenticationPrincipal UserDetails userDetails
+				  					) 
 		          throws Exception {
+			  
+			  String username=userDetails.getUsername();
+				MemberVO m= this.memberService.idCheck(username);
+				
+			  
+			  
 		      response.setContentType("text/html;charset=UTF-8");
-		      String uploadFolder = request.getServletContext().getRealPath("upload");
-
+		      PrintWriter out=response.getWriter();
+				//b.setMemberVO(m);
 		      // mateno를 사용하여 삭제할 게시물을 조회
 		      Community_boardVO cb = this.postService.getPostInfo(mateno);
+		      
+				if (!username.equals(cb.getMemberVO().getMember_id())) {
+			        out.println("<script>");
+			        out.println("alert('게시글 삭제 권한이 없습니다.');");
+			        out.println("window.location.href = '/community_board';");
+			        out.println("</script>");
+			        return null;
+			    }else {
+		    	 
+		      String uploadFolder = request.getServletContext().getRealPath("upload");
 
-		      if (cb != null) {
 		          System.out.println("게시물 찾음: " + cb.toString());
 
 		          // 첨부 파일이 있는 경우 삭제
@@ -295,13 +337,9 @@ public class PostmakeController {
 		          this.postService.delpost(mateno);
 
 		          return "redirect:/community_board";
-		      } else {
-		          System.out.println("게시물을 찾을 수 없음: " + mateno);
-		      }
-
-		      // 게시물을 찾지 못한 경우 경고 메시지를 표시하고 메인 페이지로 리다이렉트
-		      response.getWriter().println("<script>alert('삭제할 게시물을 찾을 수 없습니다.');location.href='/community_board';</script>");
-		      return null;
+		      
+		     
+			    }
 		  }
 		  
 		 

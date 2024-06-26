@@ -20,6 +20,18 @@ public interface CommentService {
 
 	
 
+	Cm_CommentVO insertComment(Cm_CommentVO comment, Long parentCommentId);
+
+	Cm_CommentVO getCommentById(Long commentNo);
+
+	List<Cm_CommentVO> getRepliesByParentComment(Cm_CommentVO parentComment);
+
+	Cm_CommentVO updateReply(Long commentNo, Cm_CommentVO existingComment) throws Exception;
+
+	
+
+	
+
 
 
 

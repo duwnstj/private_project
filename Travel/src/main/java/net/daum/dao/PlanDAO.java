@@ -22,4 +22,6 @@ public interface PlanDAO {
 	CityVO getCityCode(String cityCode);
 
 	List<PlanVO> allUserPlan();
+
+	PlanVO getPlan(int planNo);
 }

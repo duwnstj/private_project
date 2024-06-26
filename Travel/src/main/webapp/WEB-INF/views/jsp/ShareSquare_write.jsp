@@ -13,6 +13,7 @@
   <div id="aBw_wrap">
     <h2 class="aBw_title">후기 공유 작성</h2>
     <form method="post" action="ShareSquare_write_ok" onsubmit="return ss_writecheck();" enctype="multipart/form-data">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
      <table id="aBw_t">
       <tr>
        <th>작성자</th>

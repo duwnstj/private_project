@@ -44,5 +44,9 @@ public class PlanServiceImpl implements PlanService {
 		return this.planDao.allUserPlan();
 	}
 
-	
+	@Override
+	public PlanVO getPlan(int planNo) {
+		return this.planDao.getPlan(planNo);
+	}
+
 }

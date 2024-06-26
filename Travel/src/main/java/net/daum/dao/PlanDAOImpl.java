@@ -53,4 +53,10 @@ public class PlanDAOImpl implements PlanDAO {
 	public List<PlanVO> allUserPlan() {
 		return this.planRepo.allUserPlan();
 	}
+
+	@Override
+	public PlanVO getPlan(int planNo) {
+		return this.planRepo.findById(planNo).orElse(null);
+	}
+
 }

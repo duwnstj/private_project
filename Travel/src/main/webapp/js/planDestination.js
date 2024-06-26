@@ -202,6 +202,7 @@ function removeMarker(markerRemove){
 	markers= markers.filter(function(marker){
 		if(marker === markerRemove){
 			marker.setMap(null);// 지도에서 마커 제거
+			document.getElementById('placeNameInput').value = '';
 			return false;// 배열에서도 마커 제거
 		}// if
 		return true;// 제거한 마커외 다른 마커 유지

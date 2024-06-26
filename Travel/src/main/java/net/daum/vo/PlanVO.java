@@ -66,7 +66,7 @@ public class PlanVO {
     @JoinColumn(name = "member_id")
     private MemberVO memberVO;
 	
-	   @ManyToMany
+	   @ManyToMany(fetch = FetchType.LAZY)
 	   @JoinTable(
 	         name= "plan_city",
 	         joinColumns= @JoinColumn(name= "plan_no"),

@@ -15,18 +15,20 @@
 
 <div class="post-container">
 	<div class="search-container">
-		<form id="searchForm" method="get" action="community_board" onsubmit="return search();">
+		<form id="searchForm" method="get" action="community_board"
+			onsubmit="return search();">
 			<select id="searchType" name="searchType">
-				<option value="" ${searchType==null || searchType==''? 'selected' : ''}>전체</option>
+				<option value=""
+					${searchType==null || searchType==''? 'selected' : ''}>전체</option>
 				<option value="title" ${searchType=='title' ? 'selected' : ''}>제목</option>
 				<option value="content" ${searchType=='content' ? 'selected' : ''}>내용</option>
-			</select>
-			<input type="text" placeholder="제목,내용,#해시태그로 검색해보세요..." name="searchInput" id="searchInput" value="${searchInput}">
+			</select> 
+			<input type="text" placeholder="제목,내용,#해시태그로 검색해보세요..."
+				name="searchInput" id="searchInput" value="${searchInput}">
 			<button type="submit" class="user-background-color">검색</button>
 		</form>
 	</div>
 </div>
-
 <script>
 	$(document).ready(function() {
 		// Form 제출 시 해시태그 제거
@@ -37,6 +39,17 @@
 	});
 </script>
 
+<div class="sidebar">
+	<ul>
+		<li><a onclick="location='postMake';">게시물 만들기</a></li>
+		<!-- 게시물 만들기 버튼에 텍스트 색상 적용 -->
+		<li><a onclick="location='Talk';">톡(TALK)</a></li>
+		<!-- 톡(TALK) 버튼에 텍스트 색상 적용 -->
+
+	</ul>
+</div>
+
+<!-- 인스타그램 스타일의 게시물 폼 추가 -->
 <div id="search-results">
 	<c:forEach var="p" items="${posts}">
 		<div class="instagram-post">
@@ -46,14 +59,16 @@
 
 				<!-- 수정 및 삭제 토글 버튼 -->
 				<button type="button" class="toggle-button">옵션</button>
+				<!-- 수정 및 삭제 옵션 -->
 				<div class="options" id="options-${p.mateno}">
 					<form method="post" action="post_edit">
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" /> 
 						<input type="hidden" name="mateno" value="${p.mateno}">
 						<button type="submit">게시물 수정하기</button>
 					</form>
 					<form method="post" action="post_del_ok" onsubmit="return del_check();">
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 						<input type="hidden" name="mateno" value="${p.mateno}">
 						<button type="submit">게시물 삭제하기</button>
 					</form>
@@ -72,9 +87,11 @@
 					<i class="bi bi-heart" id="like-icon"></i> 좋아요
 				</button>
 
+				<!-- 게시물에 대한 댓글 버튼 -->
 				<button class="comment-button" data-mateno="${p.mateno}">댓글</button>
 			</div>
 
+			<!-- 댓글 입력 폼 및 댓글 목록 -->
 			<div id="comment-section-${p.mateno}" class="comment-section" style="display: none;">
 				<form class="commentForm" data-mateno="${p.mateno}">
 					<input type="hidden" name="commentWriter" id="commentWriter">
@@ -82,7 +99,35 @@
 					<input type="hidden" name="parentCommentId" value="0">
 					<button type="submit">댓글 추가</button>
 				</form>
-				<div id="comment-list-${p.mateno}" class="comment-list"></div>
+				<div id="comment-list-${p.mateno}" class="comment-list">
+					<c:forEach var="comment" items="${p.comments}">
+						<div class="comment" id="comment-${comment.commentNo}">
+							<p>${comment.commentWriter}:${comment.commentText}</p>
+							<button class="edit-comment-button" data-commentid="${comment.commentNo}" data-mateno="${p.mateno}">수정</button>
+							<button class="delete-comment-button" data-commentno="${comment.commentNo}" data-mateno="${p.mateno}">삭제</button>
+							<button class="reply-button" data-commentid="${comment.commentNo}">댓글달기</button>
+
+							<!-- 대댓글 입력 폼 -->
+							<div id="reply-form-${comment.commentNo}" class="reply-form" style="display: none;">
+								<form method="post" class="replyForm" data-mateno="${p.mateno}">
+									<input type="hidden" name="commentWriter" id="commentWriter">
+									<input type="text" name="commentText" class="replyText" placeholder="대댓글 입력"> 
+									<input type="hidden" name="parentCommentId" value="${comment.commentNo}">
+									<button type="submit">대댓글 추가</button>
+								</form>
+							</div>
+
+							<!-- 대댓글 목록 -->
+							<div id="reply-list-${comment.commentNo}" class="reply-list" style="margin-left: 20px;">
+								<c:forEach var="reply" items="${comment.childComments}">
+									<div class="reply">
+										<p>${reply.commentWriter}:${reply.commentText}</p>
+									</div>
+								</c:forEach>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
 			</div>
 
 			<p class="hashtag">

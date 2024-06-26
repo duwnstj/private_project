@@ -52,4 +52,9 @@ public class PlanDAOImpl implements PlanDAO {
 		return this.planRepo.allUserPlan();
 	}
 
+	@Override
+	public PlanVO getPlan(int planNo) {
+		return this.planRepo.findById(planNo).orElse(null);
+	}
+
 }

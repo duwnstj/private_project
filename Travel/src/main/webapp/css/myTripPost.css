@@ -55,13 +55,14 @@ p{
     color: black;
 }
 
-.citylist{
+.planlist{
 	display: flex;
     flex-direction: column;
     justify-content: flex-end;
     height: 200px;
-    width: -webkit-fill-available;	
+    width: -webkit-fill-available;
 }
+
 .dates {
     text-align: right; /* 날짜들을 오른쪽 정렬 */
     margin-right: 15px;
@@ -71,9 +72,26 @@ p{
     font-weight: bold;
 }
 
+.dates,
+.nationalName,
+.cityNames {
+	margin-bottom: 10px;
+}
+
 .cityImage{
 	height:200px;
 }
+
 .cityImage>img {
 	border-radius: 10px;
+}
+
+.button_container{
+	display: flex;
+    justify-content: flex-end;
+    margin-right: 10px;
+}
+
+.button_container form {
+	margin: 0 5px; /* 버튼 사이의 간격 설정 */
 }

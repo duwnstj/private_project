@@ -43,7 +43,6 @@ public class MyTripController {// MyTrip Controller
 		String memberID = userDetails.getUsername();
 		MemberVO member = memberService.idCheck(memberID);
 		
-		//회원의 일정번호 가져오기
 		List<PlanVO> myPlan= member.getPlanVO();
 		Collections.sort(myPlan, new planComparator());
 

@@ -2326,3 +2326,12 @@ Binding(ALT+SHIFT+D R,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.lsp4e 1 0 2024-06-26 14:18:20.883
+!MESSAGE [Info]	ESLint server running in node v18.18.2
+
+!ENTRY org.eclipse.lsp4e 1 0 2024-06-26 14:18:21.033
+!MESSAGE [Info]	Using Typescript version (user-setting) 5.2.2 from path "E:\20231229_WebTotal\Program\sts-4-4.22.0\contents\sts-4.22.0.RELEASE\plugins\org.eclipse.wildwebdeveloper_1.1.4.202311211923\node_modules\typescript\lib\tsserver.js"
+
+!ENTRY org.eclipse.lsp4e 1 0 2024-06-26 14:18:21.062
+!MESSAGE [Info]	Typescript Server version info: {version=5.2.2, source=user-setting}

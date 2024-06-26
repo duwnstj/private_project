@@ -1,6 +1,5 @@
 package net.daum.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -39,8 +38,12 @@ public class CommentController {
     @PostMapping(value = "/add/{mateno}")
     public ResponseEntity<Cm_CommentVO> addComment(@RequestBody Cm_CommentVO comment, @PathVariable Long mateno,
                                                    @AuthenticationPrincipal UserDetails userDetails) {
+        // 현재 인증된 사용자의 Id(username)가져오기
         String username = userDetails.getUsername();
+
+        // 사용자명으로 사용자 정보 조회
         MemberVO m = this.memberService.idCheck(username);
+
         comment.setCommentWriter(username);
         Community_boardVO board = new Community_boardVO();
         board.setMateno(mateno);
@@ -54,23 +57,16 @@ public class CommentController {
         }
     }
 
-    // 특정 게시물의 댓글 조회 (부모 댓글만 조회)
+    // 특정 게시물의 댓글 조회
     @GetMapping("/list/{mateno}")
     public ResponseEntity<List<Cm_CommentVO>> getCommentsByMateno(@PathVariable Long mateno) {
         try {
             List<Cm_CommentVO> comments = commentService.getCommentByMateno(mateno);
-            List<Cm_CommentVO> parentComments = new ArrayList<>();
-            for (Cm_CommentVO comment : comments) {
-                if (comment.getParentComment() == null) {
-                    parentComments.add(comment);
-                }
-            }
-            return ResponseEntity.ok(parentComments);
+            return ResponseEntity.ok(comments);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
-
 
     // 댓글 수정 기능
     @PutMapping("/update/{commentNo}")
@@ -127,7 +123,8 @@ public class CommentController {
         board.setMateno(mateno);
         comment.setCommunityBoard(board);
         
-        Cm_CommentVO parentComment = commentService.getCommentById(parentCommentId);
+        Cm_CommentVO parentComment = new Cm_CommentVO();
+        parentComment.setCommentNo(parentCommentId);
         comment.setParentComment(parentComment);
 
         try {
@@ -138,47 +135,15 @@ public class CommentController {
         }
     }
 
- // 대댓글 목록 보기
+    // 대댓글 목록 보기
     @GetMapping("/replies/{parentCommentId}")
     public ResponseEntity<List<Cm_CommentVO>> getRepliesByParentComment(@PathVariable Long parentCommentId) {
         try {
             Cm_CommentVO parentComment = commentService.getCommentById(parentCommentId);
             List<Cm_CommentVO> replies = commentService.getRepliesByParentComment(parentComment);
-            // 각 댓글에 CommunityBoard 설정
-            for (Cm_CommentVO reply : replies) {
-                reply.setCommunityBoard(parentComment.getCommunityBoard());
-            }
-            System.out.println(">>>>>>>>>>>>>>>>"+replies);
             return ResponseEntity.ok(replies);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
-    }
-    
-  //대댓글 수정 기능
-    @PutMapping("updateReply/{commentNo}")
-    public ResponseEntity<String>updateReply(@PathVariable Long commentNo,@RequestBody Map<String,String>request,
-    										@AuthenticationPrincipal UserDetails userDetails)throws Exception{
-    	  String username = userDetails.getUsername();
-    	    Cm_CommentVO existingComment = commentService.getCommentById(commentNo);
-
-    	    if(!username.equals(existingComment.getCommentWriter())) {
-    	    	return ResponseEntity.status(HttpStatus.FORBIDDEN).body("대댓글 수정 권한이 없습니다.");
-    	    }
-    	    if(request.containsKey("commentText")) {
-    	    	String newCommentText = request.get("commentText");
-    	    	existingComment.setCommentText(newCommentText);
-    	    	
-    	    	try {
-    	    		Cm_CommentVO updatedComment = commentService.updateReply(commentNo, existingComment);
-    	    		return ResponseEntity.ok("대댓글이 성공적으로 수정되었습니다.");
-    	    		
-    	    	}catch(Exception e){
-    	    		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("대댓글 수정 중 오류가 발생했습니다.");
-    	    	}
-    	    }else {
-    	    	return ResponseEntity.ok("권한 확인됨");
-    	    }
-    	
     }
 }

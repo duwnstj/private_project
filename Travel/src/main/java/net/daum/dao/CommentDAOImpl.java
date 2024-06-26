@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
 import net.daum.vo.Cm_CommentVO;
@@ -66,32 +67,33 @@ public class CommentDAOImpl implements CommentDAO {
 
 	@Override
 	public Cm_CommentVO insertComment(Cm_CommentVO comment, Long parentCommentId) {
-		 Cm_CommentVO parentComment = commentRepo.findById(parentCommentId)
-				 .orElseThrow(() -> new IllegalArgumentException("부모 댓글을 찾을 수 없습니다.")); 
-	    comment.setParentComment(parentComment);
-	    comment.setCommunityBoard(parentComment.getCommunityBoard()); // 게시글 정보도 설정
-	    return commentRepo.save(comment);
+		 Cm_CommentVO parentComment = commentRepo.findById(parentCommentId).orElseThrow();
+	        comment.setParentComment(parentComment);
+	        return commentRepo.save(comment);
 	}
+
 
 	@Override
 	public List<Cm_CommentVO> getRepliesByParentComment(Cm_CommentVO parentComment) {
-	    List<Cm_CommentVO> replies = commentRepo.findByParentComment(parentComment);
-	    Community_boardVO board = parentComment.getCommunityBoard();
-	    for (Cm_CommentVO reply : replies) {
-	        reply.setCommunityBoard(board); // CommunityBoard 정보를 설정
-	    }
-	    return replies;
+		
+		return commentRepo.findByParentComment(parentComment);
 	}
 
 
-	@Override
-    public Cm_CommentVO updateReply(Long commentNo, Cm_CommentVO comment) throws Exception  {
-        Cm_CommentVO existingComment = commentRepo.findById(commentNo)
-        		.orElseThrow(() -> new Exception("Comment not found"));
-        existingComment.setCommentText(comment.getCommentText());
-        return commentRepo.save(existingComment);
-    }
+	
+
+
+
+
+
+
+	
+
+	
+	
+
+
+
+	
+	
 }
-
-
-

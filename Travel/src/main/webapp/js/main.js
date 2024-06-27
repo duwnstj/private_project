@@ -281,7 +281,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
-
+//
 $("#like").click(function () {
     let ChkLike = $('#like-icon');
     if (ChkLike.hasClass("bi-heart")) { /* 빈 하트 */

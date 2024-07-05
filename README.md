@@ -16,4 +16,9 @@
 ![채팅](https://github.com/JinhaakM/travel_backend/assets/167280525/90a5cd9d-d06a-4b21-8851-ed325ed8523b)
 
 <br><br>
+
+<h2>여행메이트 구인 게시판</h2>
+
+![게시판](/images/2024-07-05%2020%2032%2034.png)
+
 0626/프로젝트 종료
